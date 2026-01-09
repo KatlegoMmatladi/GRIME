@@ -1,0 +1,117 @@
+{
+  "name": "grime",
+  "displayName": "Grime",
+  "description": "A lightweight annotation and task tracker for codebases",
+  "publisher": "katlego_mmatladi",
+  "version": "1.0.1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/katlego-mmatladi/grime"
+  },
+  "homepage": "https://github.com/katlego-mmatladi/grime#readme",
+  "bugs": {
+    "url": "https://github.com/katlego-mmatladi/grime/issues"
+  },
+  "engines": {
+    "vscode": "^1.107.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "annotations",
+    "todo",
+    "fixme",
+    "notes",
+    "code-tracking",
+    "developer-tools"
+  ],
+  "activationEvents": [
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "grime.add_annotation",
+        "title": "Grime: Add Annotation",
+        "icon": "$(add)"
+      },
+      {
+        "command": "grime.edit_annotation",
+        "title": "Edit",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "grime.delete_annotation",
+        "title": "Delete",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "grime.go_to_annotation",
+        "title": "Go To File",
+        "icon": "$(selection)"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "grime",
+          "title": "Grime",
+          "icon": "resources/logo/grime.svg"
+        }
+      ]
+    },
+    "views": {
+      "grime": [
+        {
+          "id": "grime_annotations_tree",
+          "name": "Annotations",
+          "icon": "resources/logo/grime.svg"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "grime.add_annotation",
+          "when": "view == grime_annotations_tree",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "grime.edit_annotation",
+          "when": "view == grime_annotations_tree && viewItem == grime_annotation",
+          "group": "inline"
+        },
+        {
+          "command": "grime.delete_annotation",
+          "when": "view == grime_annotations_tree && viewItem == grime_annotation",
+          "group": "inline"
+        },
+        {
+          "command": "grime.go_to_annotation",
+          "when": "view == grime_annotations_tree && viewItem == grime_annotation",
+          "group": "inline"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@types/vscode": "^1.107.0",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.36.0"
+  },
+  "dependencies": {
+    "uuid": "^8.3.2"
+  }
+}
